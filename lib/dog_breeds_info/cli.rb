@@ -1,0 +1,3 @@
+class DogBreedsInfo::CLI 
+  
+end

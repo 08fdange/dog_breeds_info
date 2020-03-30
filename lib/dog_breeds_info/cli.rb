@@ -13,5 +13,15 @@ class DogBreedsInfo::CLI
     end
   end
   
+  def list_breeds(breed_letter)
+    
+  end
+  
+  def get_breed
+    puts "Please enter the number of the dog you wish to learn about: "
+    number = gets.to_i - 1 
+    
+    
+  end
   
 end

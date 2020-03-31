@@ -1,11 +1,11 @@
 class DogBreedsInfo::CLI 
   
   def call
-    get_breed_letter
+    puts "Hello, please enter the first letter of the breed you'd like more information on using 'a-z' or type 'exit': "
+    get_breed_list
   end
   
-  def get_breed_letter
-    puts "Hello, please enter the first letter of the breed you'd like more information on using 'a-z' or type 'exit': "
+  def get_breed_list
     input = nil 
     while input != "exit"
       input = gets.chomp

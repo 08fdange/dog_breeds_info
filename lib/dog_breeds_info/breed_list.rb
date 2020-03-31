@@ -3,7 +3,7 @@ class DogBreedsInfo::BreedList
   
   def initialize(letter)
     @letter = letter
-    @list = []
+    @list = {}
   end
     
   def get_list
@@ -11,6 +11,8 @@ class DogBreedsInfo::BreedList
   end
     
   def display_list
-    puts @list
+    self.list.each do |key, value|
+      puts "#{key + 1}. #{value}"
+    end
   end
 end

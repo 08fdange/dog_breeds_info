@@ -11,6 +11,9 @@ class DogBreedsInfo::CLI
       input = gets.chomp
       puts "All breeds with the letter #{input}:"
     end
+    new_list = DogBreedsInfo::BreedList.new(input)
+    new_list.get_list
+    new_list.display_list
   end
   
   def list_breeds(breed_letter)

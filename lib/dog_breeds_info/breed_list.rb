@@ -7,7 +7,10 @@ class DogBreedsInfo::BreedList
   end
     
   def get_list
-    DogBreedsInfo::Scraper.scrape_breeds_from_letter(self) if @list.empty?
+    DogBreedsInfo::Scraper.scrape_breeds_from_letter(self)
   end
     
+  def display_list
+    puts @list
+  end
 end

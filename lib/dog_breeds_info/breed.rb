@@ -8,13 +8,18 @@ class DogBreedsInfo::BreedList::Breed
     @@all << self
   end
   
-  #def get_info(dog_chosen)
-    #self.info
-  #end
+  def self.all
+    @@all
+  end
   
   def self.display_all
     @@all.each do |item|
       puts "#{item.name} : #{item.link}"
     end
   end
+  
+  def self.reset_all
+    @@all = []
+  end
+  
 end

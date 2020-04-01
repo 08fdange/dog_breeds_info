@@ -1,13 +1,11 @@
 class DogBreedsInfo::CLI 
   attr_accessor :input, :number
   
-  
   def call
     puts "Hello, please enter the first letter of the breed you'd like more information on using 'a-z' or type 'exit': "
-    @input = nil
       get_breed_list
       get_breed
-    DogBreedsInfo::BreedList::Breed.display_all
+    #DogBreedsInfo::BreedList::Breed.display_all
   end
   
   def get_breed_list
@@ -23,7 +21,7 @@ class DogBreedsInfo::CLI
   def get_breed
     puts "Please enter the number of the dog you wish to learn about: "
     @number = gets.to_i - 1
-    
+    puts DogBreedsInfo::BreedList::Breed.all[@number].name
   end
   
 end

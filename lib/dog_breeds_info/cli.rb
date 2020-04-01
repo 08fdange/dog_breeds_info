@@ -1,25 +1,34 @@
 class DogBreedsInfo::CLI 
-  attr_accessor :input, :number
+  attr_accessor :input, :number, :new_list
   
   def call
     puts "Hello, please enter the first letter of the breed you'd like more information on using 'a-z' or type 'exit': "
-      get_breed_list
-      get_breed_info
       reset_breed
+      get_breed_list
+      display_list
+      get_breed_info
       program_loop_text
+      user_decision
+  end
+  
+  def reset_call
+    DogBreedsInfo::CLI.new.call
   end
   
   def get_breed_list
     @input = gets.chomp
+    @new_list = DogBreedsInfo::BreedList.new(input)
+    @new_list.get_list
   end
   
   def display_list
-    if
-    puts "All breeds with the letter #{@input.upcase}:"
-    new_list = DogBreedsInfo::BreedList.new(input)
-    new_list.get_list
-    new_list.display_list
-    new_list.create_breeds
+    if @new_list != nil
+      puts "All breeds with the letter #{@input.upcase}:"
+      @new_list.display_list
+      @new_list.create_breeds
+    else
+      reset_call
+    end
   end
   
   def get_breed_info
@@ -42,7 +51,7 @@ class DogBreedsInfo::CLI
   def user_decision
     input = gets.chomp
     if input == "start"
-      DogBreedsInfo::CLI.new.call
+      reset_call
     elsif input == "exit"
       nil 
     else

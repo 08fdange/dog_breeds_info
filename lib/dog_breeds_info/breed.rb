@@ -22,4 +22,8 @@ class DogBreedsInfo::BreedList::Breed
     @@all = []
   end
   
+  def add_breed_info
+    DogBreedsInfo::Scraper.scrape_breed_info(self)
+  end
+  
 end

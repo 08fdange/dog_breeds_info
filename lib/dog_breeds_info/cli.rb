@@ -17,12 +17,16 @@ class DogBreedsInfo::CLI
   
   def get_breed_list
     @input = gets.chomp
-    @new_list = DogBreedsInfo::BreedList.new(input)
-    @new_list.get_list
+    if @input == 'exit'
+      exit!
+    else
+      @new_list = DogBreedsInfo::BreedList.new(input)
+      @new_list.get_list
+    end
   end
   
   def display_list
-    if @new_list != nil
+    if @new_list.list != {}
       puts "All breeds with the letter #{@input.upcase}:"
       @new_list.display_list
       @new_list.create_breeds
@@ -53,7 +57,7 @@ class DogBreedsInfo::CLI
     if input == "start"
       reset_call
     elsif input == "exit"
-      nil 
+      exit!
     else
       self.program_loop_text
     end

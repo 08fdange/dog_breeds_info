@@ -12,6 +12,6 @@ class DogBreedsInfo::Scraper
   
   def self.scrape_breed_info(breed)
     doc2 = Nokogiri::HTML(open(breed.link))
-    puts "\n#{doc2.css("div.breeds-single-intro p").first.text.strip}"
+    breed.info = "\n#{doc2.css("div.breeds-single-intro p").first.text.strip}"
   end
 end

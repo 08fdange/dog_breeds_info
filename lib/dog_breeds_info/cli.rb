@@ -3,7 +3,6 @@ class DogBreedsInfo::CLI
   
   def call
     puts "Hello, please enter the first letter of the breed you'd like more information on using 'a-z' or type 'exit': "
-      reset_breed
       get_breed_list
       display_list
       get_breed_info
@@ -12,6 +11,7 @@ class DogBreedsInfo::CLI
   end
   
   def reset_call
+    reset_breed
     DogBreedsInfo::CLI.new.call
   end
   
@@ -38,8 +38,17 @@ class DogBreedsInfo::CLI
   def get_breed_info
     puts "Please enter the number of the dog you wish to learn about: "
     @number = gets.to_i - 1
-    chosen_breed = DogBreedsInfo::BreedList::Breed.all[@number]
-    chosen_breed.add_breed_info
+    if @number <= new_list.list.length
+      chosen_breed = DogBreedsInfo::BreedList::Breed.all[@number]
+      chosen_breed.add_breed_info
+      puts chosen_breed.info
+    else
+      reset_get_breed_info
+    end
+  end
+  
+  def reset_get_breed_info
+    get_breed_info
   end
   
   def reset_breed

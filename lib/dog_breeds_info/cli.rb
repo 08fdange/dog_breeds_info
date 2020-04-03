@@ -38,7 +38,7 @@ class DogBreedsInfo::CLI
   def get_breed_info
     puts "Please enter the number of the dog you wish to learn about: "
     @number = gets.to_i - 1
-    if @number <= new_list.list.length
+    if @number < new_list.list.length
       chosen_breed = DogBreedsInfo::BreedList::Breed.all[@number]
       chosen_breed.add_breed_info
       puts chosen_breed.info

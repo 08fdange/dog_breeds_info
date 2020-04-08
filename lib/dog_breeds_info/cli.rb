@@ -1,5 +1,5 @@
 class DogBreedsInfo::CLI 
-  attr_accessor :input, :number, :new_list
+  attr_reader :new_list
   
   def call
     puts "Hello, please enter the first letter of the breed you'd like more information on using 'a-z' or type 'exit': "
@@ -16,19 +16,24 @@ class DogBreedsInfo::CLI
   end
   
   def get_breed_list
-    @input = gets.chomp
-    if @input == 'exit'
+    input = gets.chomp
+    if input == 'exit'
       exit!
     else
-      @new_list = DogBreedsInfo::BreedList.new(input)
+      @new_list = DogBreedsInfo::BreedList.all.find{|list| list.letter == input}
+      if @new_list == nil
+        @new_list = DogBreedsInfo::BreedList.new(input)
+      end
       @new_list.get_list
     end
   end
   
   def display_list
     if @new_list.list != {}
-      puts "All breeds with the letter #{@input.upcase}:"
-      @new_list.display_list
+      puts "All breeds with the letter #{@new_list.letter.upcase}:"
+      @new_list.list.each_with_index do |(key, value), i|
+        puts "#{i+1}. #{key}"
+      end
       @new_list.create_breeds
     else
       reset_call
@@ -37,9 +42,9 @@ class DogBreedsInfo::CLI
   
   def get_breed_info
     puts "Please enter the number of the dog you wish to learn about: "
-    @number = gets.to_i - 1
-    if @number < new_list.list.length
-      chosen_breed = DogBreedsInfo::BreedList::Breed.all[@number]
+    number = gets.to_i - 1
+    if number < @new_list.list.length && number >= 0
+      chosen_breed = DogBreedsInfo::BreedList::Breed.all[number]
       chosen_breed.add_breed_info
       puts chosen_breed.info
     else
@@ -62,7 +67,7 @@ class DogBreedsInfo::CLI
   end
   
   def user_decision
-    input = gets.chomp
+    input = gets.chomp.downcase
     if input == "start"
       reset_call
     elsif input == "exit"

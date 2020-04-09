@@ -22,9 +22,4 @@ class DogBreedsInfo::BreedList
     end
   end
     
-  def display_list
-    self.list.each_with_index do |(key, value), i|
-      puts "#{i+1}. #{key}"
-    end
-  end
 end
